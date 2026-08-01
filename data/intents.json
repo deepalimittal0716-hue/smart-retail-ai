@@ -1,0 +1,188 @@
+{
+  "intents": [
+    {
+      "tag": "store_hours",
+      "patterns": [
+        "what time do you open",
+        "what are your store hours",
+        "when does the store close",
+        "are you open on sunday",
+        "what time do you close today",
+        "store timing",
+        "opening hours"
+      ],
+      "responses": [
+        "Our stores are open from 10:00 AM to 9:00 PM, Monday through Sunday, including public holidays.",
+        "We're open daily from 10 AM to 9 PM. Some outlets extend hours during festive sales."
+      ]
+    },
+    {
+      "tag": "returns_policy",
+      "patterns": [
+        "what is your return policy",
+        "can i return this item",
+        "how do i return a product",
+        "return window",
+        "i want to return my order",
+        "is this item returnable"
+      ],
+      "responses": [
+        "You can return most items within 30 days of delivery, provided they are unused and in original packaging.",
+        "Returns are accepted within 30 days. Visit the Orders section and select 'Return Item' to start the process."
+      ]
+    },
+    {
+      "tag": "refund_status",
+      "patterns": [
+        "where is my refund",
+        "when will i get my refund",
+        "refund not received",
+        "refund status",
+        "how long does a refund take"
+      ],
+      "responses": [
+        "Refunds are processed within 5-7 business days after we receive the returned item.",
+        "Your refund will reflect in your original payment method within 5-7 business days of approval."
+      ]
+    },
+    {
+      "tag": "order_status",
+      "patterns": [
+        "where is my order",
+        "track my order",
+        "order status",
+        "has my order shipped",
+        "when will my order arrive",
+        "order tracking number"
+      ],
+      "responses": [
+        "You can track your order in real time from the 'My Orders' section using your order ID.",
+        "Please share your order ID and I can help check the current shipping status."
+      ]
+    },
+    {
+      "tag": "cancel_order",
+      "patterns": [
+        "cancel my order",
+        "i want to cancel this order",
+        "how do i cancel an order",
+        "stop my order from shipping"
+      ],
+      "responses": [
+        "Orders can be cancelled before they are shipped from 'My Orders' > 'Cancel Order'.",
+        "If your order hasn't shipped yet, you can cancel it instantly from the Orders page."
+      ]
+    },
+    {
+      "tag": "discounts_offers",
+      "patterns": [
+        "any discounts available",
+        "current offers",
+        "do you have any coupons",
+        "is there a sale going on",
+        "promo code",
+        "discount coupon"
+      ],
+      "responses": [
+        "We currently have seasonal discounts of up to 40% on select categories. Check the 'Offers' tab for live deals.",
+        "You can use code WELCOME10 for 10% off your first order, subject to terms and conditions."
+      ]
+    },
+    {
+      "tag": "loyalty_program",
+      "patterns": [
+        "how does the loyalty program work",
+        "loyalty points",
+        "am i a loyalty member",
+        "rewards program",
+        "how do i earn points",
+        "redeem loyalty points"
+      ],
+      "responses": [
+        "Our loyalty program rewards 1 point per Rs.100 spent. Points can be redeemed for discounts on future purchases.",
+        "As a loyalty member you earn points on every purchase and unlock tier-based perks such as early sale access."
+      ]
+    },
+    {
+      "tag": "payment_methods",
+      "patterns": [
+        "what payment methods do you accept",
+        "can i pay with cash on delivery",
+        "do you accept credit cards",
+        "payment options",
+        "is emi available"
+      ],
+      "responses": [
+        "We accept credit/debit cards, UPI, net banking, wallets, and cash on delivery for eligible pin codes.",
+        "EMI options are available on orders above Rs.3000 with select bank cards."
+      ]
+    },
+    {
+      "tag": "product_availability",
+      "patterns": [
+        "is this product in stock",
+        "when will this be back in stock",
+        "do you have this in my size",
+        "check stock availability"
+      ],
+      "responses": [
+        "You can check real-time stock availability on the product page by selecting your preferred size or variant.",
+        "If an item is out of stock, you can click 'Notify Me' to get an alert as soon as it's restocked."
+      ]
+    },
+    {
+      "tag": "live_agent",
+      "patterns": [
+        "talk to a human",
+        "connect me to an agent",
+        "i want to speak to customer support",
+        "live agent please",
+        "this bot isn't helping, get me a person"
+      ],
+      "responses": [
+        "Connecting you to a live support agent now. Please hold for a moment.",
+        "Sure, I'm transferring this conversation to one of our human support agents."
+      ]
+    },
+    {
+      "tag": "store_locator",
+      "patterns": [
+        "where is the nearest store",
+        "store locations",
+        "do you have a store near me",
+        "find a store"
+      ],
+      "responses": [
+        "You can find your nearest store using the 'Store Locator' option on our website or app.",
+        "Share your city or pin code and I can point you to the nearest outlet."
+      ]
+    },
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hi",
+        "hello",
+        "hey there",
+        "good morning",
+        "good evening"
+      ],
+      "responses": [
+        "Hello! Welcome to our store assistant. How can I help you today?",
+        "Hi there! I can help with orders, returns, offers, or store info. What do you need?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "thanks, that's all",
+        "no that's it thank you"
+      ],
+      "responses": [
+        "Thanks for stopping by! Have a great day.",
+        "You're welcome! Feel free to reach out anytime."
+      ]
+    }
+  ]
+}

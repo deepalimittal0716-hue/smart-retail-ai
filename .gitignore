@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.env
+
+# Trained model artifacts (regenerate via notebooks/ or on first run)
+app/models/*.h5
+app/models/*.pkl
+!app/models/README.md
+
+.DS_Store
+.ipynb_checkpoints/
+
+data/products/
+data/images/
+data/face_enrollment_samples/
+data/styles.csv
+data/reviews.csv
