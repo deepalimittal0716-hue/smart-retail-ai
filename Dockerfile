@@ -3,8 +3,7 @@
 # ---------------------------------------------------------------------------
 # Stage 1: builder - install Python dependencies into an isolated venv
 # ---------------------------------------------------------------------------
-FROM python:3.10-slim AS builder
-
+FROM python:3.11-slim AS builder
 WORKDIR /build
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -21,7 +20,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # ---------------------------------------------------------------------------
 # Stage 2: runtime - slim image with only what's needed to serve the API
 # ---------------------------------------------------------------------------
-FROM python:3.10-slim AS runtime
+FROM python:3.11-slim AS runtime
 
 # OpenCV requires these system libraries even in "headless" mode on
 # Debian-slim base images.
