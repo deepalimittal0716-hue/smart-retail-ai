@@ -7,8 +7,6 @@ venv/
 .env
 
 # Trained model artifacts (regenerate via notebooks/ or on first run)
-app/models/*.h5
-app/models/*.pkl
 !app/models/README.md
 
 .DS_Store
