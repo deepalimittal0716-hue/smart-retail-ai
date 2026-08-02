@@ -83,13 +83,29 @@ app.add_middleware(
 )
 
 # --------------------------------------------------------------------------- #
-# Services are instantiated once at import time (model-loading happens here),
-# then reused across all requests -- this IS the "unified pipeline" (Module
-# C1) that loads all three models once at startup.
+# Services are instantiated lazily (on first use) and cached, rather than at
+# import time. This lets uvicorn open its port and start serving /health
+# immediately, instead of blocking startup on model-loading (which can be
+# slow on constrained/free-tier hosting) -- this IS still the "unified
+# pipeline" (Module C1), it just loads each of the three models on first
+# use instead of eagerly at import time.
 # --------------------------------------------------------------------------- #
-cv_service = CVService()
-nlp_service = NLPService()
-chatbot_service = ChatbotService()
+from functools import lru_cache
+
+
+@lru_cache(maxsize=1)
+def get_cv_service() -> CVService:
+    return CVService()
+
+
+@lru_cache(maxsize=1)
+def get_nlp_service() -> NLPService:
+    return NLPService()
+
+
+@lru_cache(maxsize=1)
+def get_chatbot_service() -> ChatbotService:
+    return ChatbotService()
 
 # In-memory counters for the dashboard (would be a real DB/warehouse in prod).
 _dashboard_state = {
@@ -166,7 +182,7 @@ async def health():
 async def classify_product(file: UploadFile = File(..., description="JPEG/PNG/WEBP product image.")):
     image_bytes = await _validated_image_bytes(file)
     try:
-        result = cv_service.classify_product(image_bytes)
+        result = get_cv_service().classify_product(image_bytes)
     except Exception as exc:  # pragma: no cover - defensive guard
         raise HTTPException(status_code=500, detail=f"Classification failed: {exc}") from exc
 
@@ -185,7 +201,7 @@ async def classify_product(file: UploadFile = File(..., description="JPEG/PNG/WE
 async def recognize_face(file: UploadFile = File(..., description="JPEG/PNG/WEBP image containing a face.")):
     image_bytes = await _validated_image_bytes(file)
     try:
-        result = cv_service.recognize_face(image_bytes)
+        result = get_cv_service().recognize_face(image_bytes)
     except Exception as exc:  # pragma: no cover
         raise HTTPException(status_code=500, detail=f"Face recognition failed: {exc}") from exc
     return result
@@ -202,7 +218,7 @@ async def recognize_face(file: UploadFile = File(..., description="JPEG/PNG/WEBP
     dependencies=[Depends(verify_api_key)],
 )
 async def analyze_sentiment(payload: SentimentAnalysisRequest):
-    result = nlp_service.analyze_sentiment(payload.text)
+    result = get_nlp_service().analyze_sentiment(payload.text)
 
     _dashboard_state["sentiment_counts"][result["label"]] += 1
     _dashboard_state["sentiment_confidence_sum"] += result["confidence"]
@@ -221,7 +237,7 @@ async def analyze_sentiment(payload: SentimentAnalysisRequest):
     dependencies=[Depends(verify_api_key)],
 )
 async def chatbot(payload: ChatbotRequest):
-    result = chatbot_service.get_reply(payload.message)
+    result = get_chatbot_service().get_reply(payload.message)
     _dashboard_state["total_chatbot_queries"] += 1
     return result
 
@@ -236,7 +252,7 @@ async def chatbot(payload: ChatbotRequest):
     summary="Aggregated live metrics for the customer-intelligence dashboard",
 )
 async def dashboard_stats():
-    visit_stats = cv_service.visit_stats()
+    visit_stats = get_cv_service().visit_stats()
     sentiment_count = _dashboard_state["sentiment_count"]
     avg_conf = (
         _dashboard_state["sentiment_confidence_sum"] / sentiment_count

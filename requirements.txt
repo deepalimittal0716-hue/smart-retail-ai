@@ -12,9 +12,9 @@ Pillow==10.4.0
 numpy==1.26.4
 
 # ---- Machine Learning / NLP ----
-scikit-learn==1.5.1
-scipy==1.13.1
-joblib==1.4.2
+scikit-learn==1.9.0
+scipy==1.17.1
+joblib==1.5.3
 pandas==2.2.2
 
 # ---- Utilities ----
